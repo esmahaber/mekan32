@@ -1,146 +1,34 @@
 extends layout
+include ortak_fonksiyonlar/fonksiyonlar
 block content
   //Başlık bölümündeki bilgileri ayarlaya
   #banner.page-header
     //satır oluştur
     .row
       .col-lg-6
-        h1
-          |Mekan32
-          small &nbsp;Isparta civarındaki mekanları keşfedin!
+        //boşluk olmamalı
+        h1=sayfaBaslik.siteAdi
+          small &nbsp;#{sayfaBaslik.aciklama}
   .row
     //mobil uyumlu listeleme
     .col-xs-12.col-sm-12
       //Liste grubu oluştur
-      .row.list-group
-       //Listeye öğe ekleme. Birden fazla eleman ekliycekseniz
-       //aşağıdaki kodu kopyalayın ve yapıştırın
-       .col-xs-12.list-group-item
-           //Linklerin, yıldızların ve adresin oluşturulması
-           h4
-             a(href='/mekan/') Starbucks
-             small &nbsp;
-             span.glyphicon.glyphicon-star
-             span.glyphicon.glyphicon-star
-             span.glyphicon.glyphicon-star
-             span.glyphicon.glyphicon-star
-             span.glyphicon.glyphicon-star-empty
-           span.badge.pull-right.badge-default 10km
-           p.address Centrum Garden AVM
-           p
-              span.label.label-warning Dünya Kahveleri
-              | &nbsp;
-              span.label.label-warning Kekler
-              | &nbsp;
-              span.label.label-warning Pastalar
-              | &nbsp;                        
-    
+      //döngü oluşturduk
+      each mekan in mekanlar
+        .row.list-group
+         //Listeye öğe ekleme. Birden fazla eleman ekliycekseniz
+         //aşağıdaki kodu kopyalayın ve yapıştırın
+         .col-xs-12.list-group-item
+             //Linklerin, yıldızların ve adresin oluşturulması
+             h4
+               a(href='/mekan/')=mekan.ad
+               small &nbsp;
+               +puanOlustur(mekan.puan)
 
-      .row.list-group
-       //Listeye öğe ekleme. Birden fazla eleman ekliycekseniz
-       //aşağıdaki kodu kopyalayın ve yapıştırın
-       .col-xs-12.list-group-item
-           //Linklerin, yıldızların ve adresin oluşturulması
-           h4
-             a(href='') Friends Cafe
-             small &nbsp;
-             span.glyphicon.glyphicon-star
-             span.glyphicon.glyphicon-star
-             span.glyphicon.glyphicon-star
-             span.glyphicon.glyphicon-star-empty
-             span.glyphicon.glyphicon-star-empty
-           span.badge.pull-right.badge-default 5km
-           p.address Süleyman Demirel Caddesi
-           p
-              span.label.label-warning Dünya Kahveleri
-              | &nbsp;
-              span.label.label-warning Sıcak İçecekler
-              | &nbsp;
-              span.label.label-warning Pastalar
-              | &nbsp; 
-      
-
-      .row.list-group
-       //Listeye öğe ekleme. Birden fazla eleman ekliycekseniz
-       //aşağıdaki kodu kopyalayın ve yapıştırın
-       .col-xs-12.list-group-item
-           //Linklerin, yıldızların ve adresin oluşturulması
-           h4
-             a(href='') Sarımsak Kafe
-             small &nbsp;
-             span.glyphicon.glyphicon-star
-             span.glyphicon.glyphicon-star
-             span.glyphicon.glyphicon-star
-             span.glyphicon.glyphicon-star
-             span.glyphicon.glyphicon-star-empty
-           span.badge.pull-right.badge-default 7km
-           p.address Iyaş Arkası
-           p
-              span.label.label-warning Çay
-              | &nbsp;
-              span.label.label-warning Canlı Müzik
-              | &nbsp;
-              span.label.label-warning Okey
-              | &nbsp;   
-              span.label.label-warning Tavla
-              | &nbsp;
-      
-
-      .row.list-group
-       //Listeye öğe ekleme. Birden fazla eleman ekliycekseniz
-       //aşağıdaki kodu kopyalayın ve yapıştırın
-       .col-xs-12.list-group-item
-           //Linklerin, yıldızların ve adresin oluşturulması
-           h4
-             a(href='') Edward's Coffee
-             small &nbsp;
-             span.glyphicon.glyphicon-star
-             span.glyphicon.glyphicon-star
-             span.glyphicon.glyphicon-star
-             span.glyphicon.glyphicon-star
-             span.glyphicon.glyphicon-star
-           span.badge.pull-right.badge-default 15km
-           p.address Kafeler Caddesi
-           p
-              span.label.label-warning Dünya Kahveleri
-              | &nbsp;
-              span.label.label-warning Pastalar
-              | &nbsp;
-        
-
-      .row.list-group
-       //Listeye öğe ekleme. Birden fazla eleman ekliycekseniz
-       //aşağıdaki kodu kopyalayın ve yapıştırın
-       .col-xs-12.list-group-item
-           //Linklerin, yıldızların ve adresin oluşturulması
-           h4
-             a(href= '') BARAQAH
-             small &nbsp;
-             span.glyphicon.glyphicon-star
-             span.glyphicon.glyphicon-star
-             span.glyphicon.glyphicon-star
-             span.glyphicon.glyphicon-star-empty
-             span.glyphicon.glyphicon-star-empty
-           span.badge.pull-right.badge-default 3km
-           p.address Iyaş Arkası
-           p
-              span.label.label-warning Kahvaltı
-              | &nbsp;
-              span.label.label-warning Maç
-              | &nbsp;
-              span.label.label-warning Soğuk İçecekler
-              | &nbsp;
-
-              
-
-
-
-      
-
-
-
-
-
-
-
-    
+             span.badge.pull-right.badge-default=mekan.mesafe
+             p.address=mekan.adres
+             p
+              each imkan in mekan.imkanlar
+                span.label.label-warning=imkan
+                | &nbsp;
+                
